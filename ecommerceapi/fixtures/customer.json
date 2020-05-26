@@ -1,0 +1,20 @@
+[
+    {
+        "model": "ecommerceapi.customer",
+        "pk": 1,
+        "fields": {
+            "user_id": 1,
+            "address": "123 Woodland Street Nashville, TN",
+            "phone_number": "615-846-2344"
+        }
+    },
+    {
+        "model": "ecommerceapi.customer",
+        "pk": 2,
+        "fields": {
+            "user_id": 2,
+            "address": "567 Music Row Blvd Nashville, TN",
+            "phone_number": "615-539-2385"
+        }
+    }
+]
