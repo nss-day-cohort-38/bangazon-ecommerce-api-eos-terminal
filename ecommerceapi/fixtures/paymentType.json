@@ -1,0 +1,35 @@
+[
+    {
+        "model": "ecommerceapi.paymentType",
+        "pk": 1,
+        "fields": {
+            "merchant_name": "Visa",
+            "account_number": "34094965984",
+            "expiration_date": "2023-07-13T11:03:02.047Z",
+            "customer_id": 1,
+            "created_at": "2019-05-23T14:09:23.047Z"
+        }
+    },
+    {
+        "model": "ecommerceapi.paymentType",
+        "pk": 2,
+        "fields": {
+            "merchant_name": "MasterCard",
+            "account_number": "204959689403",
+            "expiration_date": "2019-12-19T04:11:23.047Z",
+            "customer_id": 2,
+            "created_at": "2019-04-18T12:03:23.047Z"
+        }
+    },
+    {
+        "model": "ecommerceapi.paymentType",
+        "pk": 3,
+        "fields": {
+            "merchant_name": "MasterCard",
+            "account_number": "5849305833",
+            "expiration_date": "2021-03-05T09:13:23.047Z",
+            "customer_id": 1,
+            "created_at": "2019-04-18T12:03:23.047Z"
+        }
+    }
+]
