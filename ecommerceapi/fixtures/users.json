@@ -1,24 +1,14 @@
 [
     {
         "model": "auth.user",
-        "pk": 1,
-        "fields": {
-            "first_name": "Alyssa",
-            "last_name": "Nycum",
-            "email": "alyssa@gmail.com",
-            "date_joined": "2019-09-23T14:06:30.047Z",
-            "last_login": "2019-09-23T14:06:30.047Z"
-        }
-    },
-    {
-        "model": "auth.user",
         "pk": 2,
         "fields": {
-            "first_name": "Cooper",
-            "last_name": "Nichols",
-            "email": "cooper@gmail.com",
-            "date_joined": "2019-09-01T14:09:30.047Z",
-            "last_login": "2019-09-01T14:09:30.047Z"
+            "password": "pbkdf2_sha256$150000$10yCtpQpDTEI$PwDkDJvyKpH7xSLQhOXl2yY7t3yxu59/l6eEtDT0Hm8=",
+            "last_login": null, "is_superuser": false, "username": "hr_fred", "first_name": "Fred",
+            "last_name": "Jones",
+            "email": "fred@bangazon.com",
+            "is_staff": false,
+            "is_active": true, "date_joined": "2019-09-23T14:06:30.047Z"
         }
     }
 ]

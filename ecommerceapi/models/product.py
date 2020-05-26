@@ -11,7 +11,7 @@ class Product(models.Model):
     price = models.FloatField()
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
-    location = models.CharField(max_length=75)
+    location = models.CharField(max_length=75, null=True)
     image = models.CharField(max_length=255)
     created_at = models.DateTimeField()
     product_type = models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
