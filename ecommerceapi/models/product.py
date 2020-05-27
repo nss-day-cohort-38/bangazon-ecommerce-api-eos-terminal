@@ -14,7 +14,7 @@ class Product(models.Model):
     location = models.CharField(max_length=75, null=True)
     image = models.CharField(max_length=255)
     created_at = models.DateTimeField()
-    product_type = models.ForeignKey(ProductType, on_delete=models.DO_NOTHING)
+    product_type = models.ForeignKey(ProductType, related_name="products", on_delete=models.DO_NOTHING)
 
     class Meta:
         ordering = (F('created_at').asc(nulls_last=True),)
