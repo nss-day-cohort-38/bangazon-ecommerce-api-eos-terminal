@@ -17,10 +17,11 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from ecommerceapi.models import *
-from ecommerceapi.views import register_user, login_user, PaymentTypes
+from ecommerceapi.views import register_user, login_user, PaymentTypes, Customers
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
+router.register(r'customers', Customers, 'customer')
 
 urlpatterns = [
     path('', include(router.urls)),
