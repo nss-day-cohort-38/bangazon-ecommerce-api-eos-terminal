@@ -48,7 +48,6 @@ class OrderItems(ViewSet):
             orders, many=True, context={'request': request})
         return Response(serializer.data)
 
-        # orders = Order.objects.all()
 
     def create(self, request):
 
