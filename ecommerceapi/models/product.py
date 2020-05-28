@@ -12,7 +12,7 @@ class Product(models.Model):
     description = models.CharField(max_length=255)
     quantity = models.IntegerField()
     location = models.CharField(max_length=75, null=True)
-    image = models.CharField(max_length=255)
+    image = models.CharField(max_length=255, null=True)
     created_at = models.DateTimeField()
     product_type = models.ForeignKey(ProductType, related_name="products", on_delete=models.DO_NOTHING)
 
