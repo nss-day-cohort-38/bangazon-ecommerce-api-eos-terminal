@@ -5,7 +5,8 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import Product as ProductModel
-
+from ecommerceapi.models import ProductType, Customer
+from datetime import date
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     """JSON serializer for Product 
@@ -28,10 +29,10 @@ class Product(ViewSet):
 
 
     def retrieve(self, request, pk=None):
-        """Handle GET requests for single product type
+        """Handle GET requests for single product
 
         Returns:
-            Response -- JSON serialized product type instance
+            Response -- JSON serialized product instance
         """
         try:
             product = ProductModel.objects.get(pk=pk)
@@ -50,3 +51,22 @@ class Product(ViewSet):
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
         return Response(serializer.data)
+
+    def create(self, request):
+
+        product_type = ProductType.objects.get(pk=request.data["product_type_id"])
+        customer = Customer.objects.get(user=request.auth.user)
+
+        new_product = ProductModel()
+        new_product.customer = customer
+        new_product.created_at = date.now()
+        new_product.product_type = product_type
+
+        new_product.save()
+
+        serializer = ProductSerializer(
+            new_product, context={'request': request}
+        )
+
+        return Response(serializer.data)
+
