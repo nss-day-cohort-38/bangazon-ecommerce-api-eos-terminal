@@ -28,5 +28,65 @@
             "created_at": "2019-05-23T14:09:23.047Z",
             "product_type_id": 2
         }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 3,
+        "fields": {
+            "title": "Death Ray",
+            "customer_id": 2,
+            "price": 500.00,
+            "description": "Kills in one shot, guaranteed.",
+            "quantity": 1,
+            "location": "Ontario",
+            "image": "death_ray.jpeg",
+            "created_at": "2019-04-23T14:09:23.047Z",
+            "product_type_id": 3
+        }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 4,
+        "fields": {
+            "title": "Siberian Tiger Fur Rug",
+            "customer_id": 2,
+            "price": 500.00,
+            "description": "Alyssa disapproves, but it's still really soft.",
+            "quantity": 1,
+            "location": "Ontario",
+            "image": "death_ray.jpeg",
+            "created_at": "2019-04-23T14:09:23.047Z",
+            "product_type_id": 4
+        }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 4,
+        "fields": {
+            "title": "Dragon Tooth",
+            "customer_id": 2,
+            "price": 1000000000.00,
+            "description": "You can craft the best weapon in the game with this thing.",
+            "quantity": 1,
+            "location": "Ontario",
+            "image": "death_ray.jpeg",
+            "created_at": "2019-04-23T14:09:23.047Z",
+            "product_type_id": 4
+        }
+    },
+    {
+        "model": "ecommerceapi.product",
+        "pk": 4,
+        "fields": {
+            "title": "Dragon Tooth",
+            "customer_id": 2,
+            "price": 1000000000.00,
+            "description": "You can craft the best weapon in the game with this thing.",
+            "quantity": 1,
+            "location": "Ontario",
+            "image": "death_ray.jpeg",
+            "created_at": "2019-04-23T14:09:23.047Z",
+            "product_type_id": 4
+        }
     }
 ]
