@@ -21,7 +21,7 @@ class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
             lookup_field='id'
         )
         fields = ('id','url', 'payment_type', 'created_at',)
-        depth = 2
+        depth = 1
 
 class OrderItems(ViewSet):
 
@@ -74,7 +74,6 @@ class OrderItems(ViewSet):
             Response -- Empty body with 204 status code
         """
         order = Order.objects.get(pk=pk)
-        order.created_at = datetime.now()
         payment_type = PaymentType.objects.get(pk=request.data["payment_type_id"])
         order.payment_type = payment_type
         order.save()
