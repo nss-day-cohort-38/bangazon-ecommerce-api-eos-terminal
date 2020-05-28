@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import Order, Customer, PaymentType
+from datetime import datetime
 
 
 class OrderItemSerializer(serializers.HyperlinkedModelSerializer):
@@ -51,13 +52,13 @@ class OrderItems(ViewSet):
 
     def create(self, request):
 
-        payment_type = PaymentType.objects.get(pk=request.data["payment_type_id"])
+        # payment_type = PaymentType.objects.get(pk=request.data["payment_type_id"])
         customer = Customer.objects.get(user=request.auth.user)
 
 
         new_order_item = Order()
-        new_order_item.starttime = request.data["starttime"]
-        new_order_item.payment_type = payment_type
+        new_order_item.created_at = datetime.now()
+        new_order_item.payment_type = None
         new_order_item.customer = customer
 
         new_order_item.save()
@@ -73,7 +74,7 @@ class OrderItems(ViewSet):
             Response -- Empty body with 204 status code
         """
         order = Order.objects.get(pk=pk)
-        order.starttime = request.data["starttime"]
+        order.created_at = datetime.now()
         payment_type = PaymentType.objects.get(pk=request.data["payment_type_id"])
         order.payment_type = payment_type
         order.save()
