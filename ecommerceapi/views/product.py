@@ -6,7 +6,7 @@ from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import Product as ProductModel
 from ecommerceapi.models import ProductType, Customer
-from datetime import date
+from datetime import datetime
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     """JSON serializer for Product 
@@ -59,8 +59,14 @@ class Product(ViewSet):
 
         new_product = ProductModel()
         new_product.customer = customer
-        new_product.created_at = date.now()
+        new_product.created_at = datetime.now()
         new_product.product_type = product_type
+        new_product.title = request.data["title"]
+        new_product.price = request.data["price"]
+        new_product.description = request.data["description"] 
+        new_product.quantity = request.data["quantity"]
+        new_product.location = request.data["location"]
+        new_product.image = request.data["image"]
 
         new_product.save()
 
