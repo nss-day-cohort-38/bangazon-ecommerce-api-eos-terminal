@@ -17,14 +17,14 @@ from django.urls import include, path
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 from ecommerceapi.models import *
-from ecommerceapi.views import register_user, login_user, PaymentTypes, Customers, ProductTypes, Product
+from ecommerceapi.views import register_user, login_user, PaymentTypes, Customers, ProductTypes, Product, Users
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
 router.register(r'customers', Customers, 'customer')
 router.register(r'producttypes', ProductTypes, 'producttype')
 router.register(r'products', Product, 'product')
-router.register(r'customers', Customers, 'customer')
+router.register(r'users', Users, 'user')
 
 urlpatterns = [
     path('', include(router.urls)),

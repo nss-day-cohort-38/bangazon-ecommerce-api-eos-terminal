@@ -3,3 +3,4 @@ from .paymenttype import PaymentTypes
 from .productType import ProductTypes
 from .product import Product
 from .customer import Customers
+from .user import Users
