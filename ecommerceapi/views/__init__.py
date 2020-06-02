@@ -5,3 +5,4 @@ from .productType import ProductTypes
 from .product import Product
 from .customer import Customers
 from .orders import OrderItems
+from .orderproduct import OrderProducts
