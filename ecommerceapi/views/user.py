@@ -11,7 +11,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
             view_name='user',
             lookup_field='id'
         )
-        fields = ('id', 'email', 'url')
+        fields = ('id', 'first_name', 'last_name', 'url')
 class Users(ViewSet):
     def list(self, request):
         """Handle GET requests to customers resource

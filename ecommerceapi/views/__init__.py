@@ -4,3 +4,4 @@ from .productType import ProductTypes
 from .product import Product
 from .customer import Customers
 from .user import Users
+from .account import AccountView
