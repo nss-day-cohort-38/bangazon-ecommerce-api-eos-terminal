@@ -8,7 +8,7 @@ class Order(models.Model):
 
     customer = models.ForeignKey(Customer, on_delete=models.DO_NOTHING)
     payment_type = models.ForeignKey(PaymentType, null=True, on_delete=models.DO_NOTHING)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = (F('created_at').asc(nulls_last=True),)
