@@ -49,8 +49,8 @@ class Product(ViewSet):
         """
         print(request)
         customer = Customer.objects.get(user=request.auth.user)
-        # product = ProductModel.objects.all()
-        product = ProductModel.objects.filter(customer=customer)
+        product = ProductModel.objects.all()
+        # product = ProductModel.objects.filter(customer=customer)
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
         return Response(serializer.data)
