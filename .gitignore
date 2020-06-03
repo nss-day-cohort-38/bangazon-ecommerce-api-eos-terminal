@@ -20,6 +20,7 @@ local_settings.py
 
 # virtualenv
 bangazonEnv/
+bangazonenv/
 .vscode
 
 .DS_Store
@@ -28,6 +29,7 @@ media/
 *.pyc
 *.db
 *.pid
+SQLite.sql
 
 # django migrations
 migrations
