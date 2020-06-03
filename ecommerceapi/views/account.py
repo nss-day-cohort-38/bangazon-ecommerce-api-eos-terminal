@@ -35,4 +35,20 @@ class AccountView (ViewSet):
         serializer = CustomerSerializer(customer, context={'request': request})
         return Response(serializer.data)
 
+    def update(self, request, pk=None):
+        """Handle PUT requests for an individual order item
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        customer = Customer.objects.get(pk=pk)
+        user = User.objects.get(pk=pk)
+        user.last_name = request.data["lastName"]
+        user.save()
+        customer.user = user
+        customer.address = request.data["address"]
+        customer.phone_number = request.data["phone"]
+        customer.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
+
 
