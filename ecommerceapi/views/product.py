@@ -1,6 +1,7 @@
 """Product for Bangazon LLC"""
 from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
@@ -20,12 +21,12 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             view_name='product',
             lookup_field='id'
         )
-        fields = fields = ('id', 'title', 'customer', 'price', 'description', 'quantity', 'location', 'image', 'created_at', 'product_type', 'product_type_id')
+        fields = ('id', 'title', 'customer', 'price', 'description', 'quantity', 'location', 'image', 'created_at', 'product_type', 'product_type_id')
 
 
 class Product(ViewSet):
     """Product for Bangazon LLC"""
-
+    parser_classes = (MultiPartParser, FormParser, JSONParser,)
 
 
     def retrieve(self, request, pk=None):
