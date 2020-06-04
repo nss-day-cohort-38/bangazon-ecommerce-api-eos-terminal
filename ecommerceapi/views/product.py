@@ -48,9 +48,6 @@ class Product(ViewSet):
         Returns:
             Response -- JSON serialized list of Product 
         """
-        print(request)
-        # customer = Customer.objects.get(user=request.auth.user)
-        # product = ProductModel.objects.all()
 
         user = self.request.query_params.get('user', None)
         if user is not None:
