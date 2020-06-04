@@ -13,4 +13,4 @@
 1. Create your application for your API, named `ecommerceapi`
 
 ## ERD
-Here is your [Bangazon eCommerce ERD](https://dbdiagram.io/d/5eb4d6d639d18f5553fedfb5). There should be no changes made to your ERD without approval from your product manager.
+Here is your [Bangazon eCommerce ERD](https://dbdiagram.io/d/5ed91fa5e81ffb416774d551). There should be no changes made to your ERD without approval from your product manager.
