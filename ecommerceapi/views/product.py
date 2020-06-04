@@ -49,11 +49,19 @@ class Product(ViewSet):
             Response -- JSON serialized list of Product 
         """
         print(request)
-        customer = Customer.objects.get(user=request.auth.user)
-        product = ProductModel.objects.all()
-        # product = ProductModel.objects.filter(customer=customer)
+        # customer = Customer.objects.get(user=request.auth.user)
+        # product = ProductModel.objects.all()
+
+        user = self.request.query_params.get('user', None)
+        if user is not None:
+            customer = Customer.objects.get(user=request.auth.user)
+            product = ProductModel.objects.filter(customer=customer)
+        else:
+            product = ProductModel.objects.all()
+
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
+        
         return Response(serializer.data)
 
     def create(self, request):
