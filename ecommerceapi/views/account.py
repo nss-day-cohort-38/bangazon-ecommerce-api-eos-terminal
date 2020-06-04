@@ -22,6 +22,19 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class AccountView (ViewSet):
+
+    def retrieve(self, request, pk=None):
+        """Handle GET requests for a single order item
+        Returns:
+            Response -- JSON serialized order instance
+        """
+        try:
+            customer = Customer.objects.get(pk=pk)
+            serializer = CustomerSerializer(
+                customer, context={'request': request})
+            return Response(serializer.data)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
     
     def list(self, request):
         """Handle GET requests to customers resource
