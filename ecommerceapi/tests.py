@@ -59,3 +59,37 @@ class TestOrderProduct(TestCase):
         
         # testing that the order object was deleted
         self.assertEqual(OrderProduct.objects.count(), 0) 
+
+
+class TestAccountInfo(TestCase):
+    def setUp(self):
+        self.username = 'testuser'
+        self.password = 'foobar'
+        self.user = User.objects.create_user(username=self.username, password=self.password, first_name='test', last_name='user')
+        self.token = Token.objects.create(user=self.user)
+        self.customer = Customer.objects.create(user_id=self.user.id, address="123", phone_number="ring ring")
+        
+        
+
+    def test_put_AccountInfo(self):
+        new_customer_info = {
+              "lastName": "userx",
+              "address": "123 main street",
+              "phone": "1234567890"
+            }
+        
+        response = self.client.put(
+            reverse('account-detail', kwargs={"pk":1}), new_customer_info, HTTP_AUTHORIZATION='Token ' + str(self.token), content_type="application/json"
+        )
+
+        self.assertEqual(response.status_code, 204)
+
+        response = self.client.get(
+            reverse('account-detail', kwargs={'pk': 1}), HTTP_AUTHORIZATION='Token ' + str(self.token)
+        )
+        
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data["user"]["last_name"], "userx")
+        self.assertEqual(response.data["address"], "123 main street")
+        self.assertEqual(response.data["phone_number"], "1234567890")
+        
