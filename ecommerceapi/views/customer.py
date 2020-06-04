@@ -4,6 +4,7 @@ from rest_framework.response import Response
 from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import Customer
+from django.contrib.auth.models import User
 
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     """JSON serializer for customers
@@ -16,7 +17,8 @@ class CustomerSerializer(serializers.HyperlinkedModelSerializer):
             view_name='customer',
             lookup_field='id'
         )
-        fields = ('id', 'url', 'address', 'phone_number')
+        fields = ('id', 'url', 'address', 'phone_number', 'user')
+        depth = 1
 
 
 class Customers(ViewSet):
