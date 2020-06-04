@@ -88,3 +88,22 @@ class Product(ViewSet):
 
         return Response(serializer.data)
 
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single product
+
+        Returns:
+            Response -- 200, 404, or 500 status code 
+        """
+
+        try:
+            product = ProductModel.objects.get(pk=pk)
+            product.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except ProductModel.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+            
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
