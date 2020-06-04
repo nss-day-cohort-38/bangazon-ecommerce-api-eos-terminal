@@ -44,6 +44,14 @@ class OrderProducts(ViewSet):
 
         return Response(serialize.data) 
     
+    def list(self, request):
+        customer = Customer.objects.get(user=request.auth.user)
+        order = Order.objects.get(customer_id=customer.id)
+        order_products = OrderProduct.objects.filter(order_id=order.id)
+        serializer = OrderProductSerializer(
+            order_products, many=True, context={'request': request})
+        return Response(serializer.data)
+    
     def retrieve(self, request, pk=None):
         try:
             order_product = OrderProduct.objects.get(pk=pk)
