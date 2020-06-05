@@ -84,6 +84,17 @@ class Product(ViewSet):
         )
 
         return Response(serializer.data)
+    
+    def update(self, request, pk=None):
+        """Handle PUT requests for an individual order item
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        product = ProductModel.objects.get(pk=pk)
+        product.quantity = request.data["quantity"] 
+        product.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
     def destroy(self, request, pk=None):
         """Handle DELETE requests for a single product
