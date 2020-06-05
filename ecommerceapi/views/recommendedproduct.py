@@ -6,6 +6,8 @@ from rest_framework import serializers
 from rest_framework import status
 from ecommerceapi.models import RecommendedProduct, Customer, Product
 from datetime import datetime
+from django.contrib.auth.models import User
+
 
 
 class RecommendedProductItemSerializer(serializers.HyperlinkedModelSerializer):
@@ -40,15 +42,15 @@ class RecommendedProductItems(ViewSet):
 
     def create(self, request):
 
-        logged_in_user_id = Customer.objects.get(user=request.auth.user)
+        logged_in_user = Customer.objects.get(user=request.auth.user)
         product = Product.objects.get(pk=request.data["product_id"])
-        # recommended_user_id = Customer.objects.get(pk=request.data["recommended_user_id"])
+        recommended_user = Customer.objects.get(pk=request.data["recommended_user_id"])
 
 
         new_recommended_product_item = RecommendedProduct()
         new_recommended_product_item.product = product
-        new_recommended_product_item.logged_in_user_id = logged_in_user_id
-        new_recommended_product_item.recommended_user_id = ["recommended_user_id"]
+        new_recommended_product_item.logged_in_user_id = logged_in_user.id
+        new_recommended_product_item.recommended_user_id = recommended_user.id
 
 
         new_recommended_product_item.save()
