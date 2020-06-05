@@ -22,7 +22,7 @@ class RecommendedProductItemSerializer(serializers.HyperlinkedModelSerializer):
             view_name='recommended_product',
             lookup_field='id'
         )
-        fields = ('id','url', 'product',)
+        fields = ('id','url', 'product', 'logged_in_user', 'recommended_user',)
         depth = 1
 
 class RecommendedProductItems(ViewSet):
@@ -39,6 +39,19 @@ class RecommendedProductItems(ViewSet):
             return Response(serializer.data)
         except Exception as ex:
             return HttpResponseServerError(ex)
+
+    
+    def list(self, request):
+        """Handle GET requests to order resource
+        Returns:
+            Response -- JSON serialized list of customer recommended_product
+        """
+        recommended_user = Customer.objects.get(user=request.auth.user)
+        recommended_products = RecommendedProduct.objects.filter(recommended_user=recommended_user)
+        serializer = RecommendedProductItemSerializer(
+            recommended_products, many=True, context={'request': request})
+        return Response(serializer.data)
+
 
     def create(self, request):
 
