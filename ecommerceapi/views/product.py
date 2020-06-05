@@ -22,7 +22,7 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             lookup_field='id'
         )
         fields = ('id', 'title', 'customer', 'price', 'description', 'quantity', 'location', 'image', 'created_at', 'product_type', 'product_type_id')
-
+        # depth = 1
 
 class Product(ViewSet):
     """Product for Bangazon LLC"""
@@ -48,9 +48,17 @@ class Product(ViewSet):
         Returns:
             Response -- JSON serialized list of Product 
         """
-        product = ProductModel.objects.all()
+
+        user = self.request.query_params.get('user', None)
+        if user is not None:
+            customer = Customer.objects.get(user=request.auth.user)
+            product = ProductModel.objects.filter(customer=customer)
+        else:
+            product = ProductModel.objects.all()
+
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
+        
         return Response(serializer.data)
 
     def create(self, request):
@@ -76,4 +84,23 @@ class Product(ViewSet):
         )
 
         return Response(serializer.data)
+
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single product
+
+        Returns:
+            Response -- 200, 404, or 500 status code 
+        """
+
+        try:
+            product = ProductModel.objects.get(pk=pk)
+            product.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except ProductModel.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+            
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

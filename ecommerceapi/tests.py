@@ -4,6 +4,7 @@ from django.urls import reverse
 from rest_framework.authtoken.models import Token
 from ecommerceapi.models import *
 from django.contrib.auth.models import User
+from datetime import datetime
 # from .views import <Why don't we need to do this?>
 
 class TestOrderProduct(TestCase):
@@ -93,3 +94,60 @@ class TestAccountInfo(TestCase):
         self.assertEqual(response.data["address"], "123 main street")
         self.assertEqual(response.data["phone_number"], "1234567890")
         
+
+class TestProduct(TestCase):
+    def setUp(self):
+        self.username = 'testuser'
+        self.password = 'foobar'
+        self.user = User.objects.create_user(username=self.username, password=self.password, first_name='test', last_name='user')
+        self.token = Token.objects.create(user=self.user)
+        self.customer = Customer.objects.create(user_id=self.user.id)
+        self.productType = ProductType.objects.create(name = "electronics")
+
+    def test_post_Product(self):
+        new_product = {
+            "title": "Product Name",
+            "customer": self.customer.id,
+            "price": 100.00,
+            "description": "I am a product",
+            "quantity": 1,
+            "location": "Nashville, TN",
+            "image": "product.png",
+            "product_type_id": self.productType.id,
+            "created_at": datetime.now() 
+            }
+        
+        response = self.client.post(
+            reverse('product-list'), new_product, HTTP_AUTHORIZATION='Token ' + str(self.token)
+          )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(Product.objects.count(), 1)
+        
+    def test_delete_Product(self):
+
+        product = Product.objects.create(
+            title = "Product Name",
+            customer = self.customer,
+            price = 100.00,
+            description = "I am a product",
+            quantity = 1,
+            location = "Nashville, TN",
+            image = "product.png",
+            product_type_id = self.productType.id,
+            created_at = datetime.now()   
+        )
+
+        # delete and response
+        response = self.client.delete((reverse('product-detail', kwargs={"pk": 1})), product, HTTP_AUTHORIZATION='Token ' + str(self.token))
+        
+        # print("response data: ", response.data)
+
+        # checking that the response is 204
+        self.assertEqual(response.status_code, 204)
+        
+        # making sure the response is empty
+        self.assertEqual(len(response.data), 0)
+        
+        # testing that the order object was deleted
+        self.assertEqual(Product.objects.count(), 0)
