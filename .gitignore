@@ -33,3 +33,6 @@ SQLite.sql
 
 # django migrations
 migrations
+
+
+SQLite.sql

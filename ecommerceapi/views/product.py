@@ -21,8 +21,8 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
             view_name='product',
             lookup_field='id'
         )
-        fields = ('id', 'title', 'customer', 'price', 'description', 'quantity', 'location', 'image', 'created_at', 'product_type', 'product_type_id')
-
+        fields = ('id', 'title', 'customer_id', 'customer', 'price', 'description', 'quantity', 'location', 'image', 'created_at', 'product_type', 'product_type_id')
+        # depth = 1
 
 class Product(ViewSet):
     """Product for Bangazon LLC"""
@@ -48,9 +48,17 @@ class Product(ViewSet):
         Returns:
             Response -- JSON serialized list of Product 
         """
-        product = ProductModel.objects.all()
+
+        user = self.request.query_params.get('user', None)
+        if user is not None:
+            customer = Customer.objects.get(user=request.auth.user)
+            product = ProductModel.objects.filter(customer=customer)
+        else:
+            product = ProductModel.objects.all()
+
         serializer = ProductSerializer(
             product, many=True, context={'request': request})
+        
         return Response(serializer.data)
 
     def create(self, request):
@@ -66,8 +74,14 @@ class Product(ViewSet):
         new_product.price = request.data["price"]
         new_product.description = request.data["description"] 
         new_product.quantity = request.data["quantity"]
-        new_product.location = request.data["location"]
-        new_product.image = request.data["image"]
+        if request.data["location"] == "null":
+            new_product.location = None
+        else:
+            new_product.location = request.data["location"]
+        if request.data["image"] == "null":
+            new_product.image = None
+        else:
+            new_product.image = request.data["image"]
 
         new_product.save()
 
@@ -76,4 +90,34 @@ class Product(ViewSet):
         )
 
         return Response(serializer.data)
+
+    def destroy(self, request, pk=None):
+        """Handle DELETE requests for a single product
+
+        Returns:
+            Response -- 200, 404, or 500 status code 
+        """
+
+        try:
+            product = ProductModel.objects.get(pk=pk)
+            product.delete()
+
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+
+        except ProductModel.DoesNotExist as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+            
+        except Exception as ex:
+            return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def update(self, request, pk=None):
+        """Handle PUT requests for an individual order item
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        product = ProductModel.objects.get(pk=pk)
+        product.quantity = request.data["quantity"]
+        product.save()
+
+        return Response({}, status=status.HTTP_204_NO_CONTENT)
 

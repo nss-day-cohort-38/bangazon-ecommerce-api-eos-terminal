@@ -9,7 +9,7 @@
             "description": "Organic, vegan, fresh squeezed, gluten free",
             "quantity": 5,
             "location": null,
-            "image": "orange_juice.jpeg",
+            "image": null,
             "created_at": "2019-10-23T14:02:23.047Z",
             "product_type_id": 1
         }
@@ -24,7 +24,7 @@
             "description": "It's good when it's good, but dear god it's bad when it's bad",
             "quantity": 5,
             "location": "Nashville",
-            "image": "falafel.jpeg",
+            "image": null,
             "created_at": "2019-10-23T14:02:23.047Z",
             "product_type_id": 1
         }
@@ -39,7 +39,7 @@
             "description": "What? Have you even tried them? They're good.",
             "quantity": 5,
             "location": "Nashville",
-            "image": "ants.jpeg",
+            "image": null,
             "created_at": "2019-10-23T14:02:23.047Z",
             "product_type_id": 1
         }
@@ -54,7 +54,7 @@
             "description": "doesn't sound very good",
             "quantity": 1,
             "location": "Nashville",
-            "image": "piano.jpeg",
+            "image": null,
             "created_at": "2019-05-23T14:09:23.047Z",
             "product_type_id": 2
         }
@@ -69,7 +69,7 @@
             "description": "Kills in one shot, guaranteed.",
             "quantity": 1,
             "location": "Nashville",
-            "image": "death_ray.jpeg",
+            "image": null,
             "created_at": "2019-04-23T14:09:23.047Z",
             "product_type_id": 3
         }
@@ -84,7 +84,7 @@
             "description": "Alyssa disapproves, but it's still really soft.",
             "quantity": 1,
             "location": "Nashville",
-            "image": "tiger_fur.jpeg",
+            "image": null,
             "created_at": "2019-04-23T14:09:23.047Z",
             "product_type_id": 4
         }
@@ -99,7 +99,7 @@
             "description": "You can craft the best weapon in the game with this thing.",
             "quantity": 1,
             "location": null,
-            "image": "dragon_tooth.jpeg",
+            "image": null,
             "created_at": "2019-04-23T14:09:23.047Z",
             "product_type_id": 4
         }
@@ -114,7 +114,7 @@
             "description": "You could make, like a.... uh... cool skirt or something with these.",
             "quantity": 1,
             "location": "Nashville",
-            "image": "pangolin_scales.jpeg",
+            "image": null,
             "created_at": "2019-04-23T14:09:23.047Z",
             "product_type_id": 4
         }
@@ -129,7 +129,7 @@
             "description": "You can make a fine perfume with this stuff",
             "quantity": 1,
             "location": "Nashville",
-            "image": "whale_fat.jpeg",
+            "image": null,
             "created_at": "2019-04-23T14:09:23.047Z",
             "product_type_id": 4
         }
