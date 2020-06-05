@@ -120,15 +120,4 @@ class Product(ViewSet):
             
         except Exception as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-    def update(self, request, pk=None):
-        """Handle PUT requests for an individual order item
-        Returns:
-            Response -- Empty body with 204 status code
-        """
-        product = ProductModel.objects.get(pk=pk)
-        product.quantity = request.data["quantity"]
-        product.save()
-
-        return Response({}, status=status.HTTP_204_NO_CONTENT)
 
