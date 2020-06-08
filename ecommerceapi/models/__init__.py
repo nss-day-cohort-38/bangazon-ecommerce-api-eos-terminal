@@ -5,3 +5,4 @@ from .product import Product
 from .productType import ProductType
 from .paymentType import PaymentType
 from .customer import Customer
+from .recommendedProduct import RecommendedProduct

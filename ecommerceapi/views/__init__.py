@@ -7,3 +7,4 @@ from .user import Users
 from .account import AccountView
 from .orders import OrderItems
 from .orderproduct import OrderProducts
+from .recommendedproduct import RecommendedProductItems
