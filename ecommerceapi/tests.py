@@ -151,3 +151,44 @@ class TestProduct(TestCase):
         
         # testing that the order object was deleted
         self.assertEqual(Product.objects.count(), 0)
+
+
+class TestRecommendedProduct(TestCase):
+    def setUp(self):
+        self.username1 = 'testuser'
+        self.password1 = 'foobar'
+        self.username2 = 'testuser2'
+        self.password2 = 'foobar2'
+
+        self.user1 = User.objects.create_user(username=self.username1, password=self.password1, first_name='test', last_name='user')
+        self.user2 = User.objects.create_user(username=self.username2, password=self.password2, first_name='test2', last_name='user2')
+        self.token = Token.objects.create(user=self.user1)
+        self.recommended_user = Customer.objects.create(user_id=self.user1.id)
+        self.logged_in_user = Customer.objects.create(user_id=self.user2.id)
+        self.productType = ProductType.objects.create(name = "electronics")
+        self.product = Product.objects.create(customer_id = self.recommended_user.id,
+            title = "Test Phone",
+            price= 800.00,
+            description= "Super cool new tech.",
+            quantity= 20,
+            location= "America",
+            image= "death_ray.jpeg",
+            product_type_id= self.productType.id
+            )
+        
+
+    def test_post_RecommendedProduct(self):
+        new_recommended_product = {
+              "logged_in_user_id": self.logged_in_user.id,
+              "product_id": self.product.id,
+              "recommended_user_id": self.recommended_user.id
+            }
+        
+        response = self.client.post(
+            reverse('recommendedproduct-list'), new_recommended_product, HTTP_AUTHORIZATION='Token ' + str(self.token)
+          )
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(RecommendedProduct.objects.count(), 1)
+
+        
