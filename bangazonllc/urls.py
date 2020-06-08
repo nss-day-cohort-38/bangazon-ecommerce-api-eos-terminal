@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from rest_framework.authtoken.views import obtain_auth_token
 from ecommerceapi.models import *
-from ecommerceapi.views import register_user, login_user, PaymentTypes, Customers, ProductTypes, Product, Users, AccountView, OrderItems, OrderProducts
+from ecommerceapi.views import register_user, login_user, PaymentTypes, Customers, ProductTypes, Product, Users, AccountView, OrderItems, OrderProducts, RecommendedProductItems
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'paymenttypes', PaymentTypes, 'paymenttype')
@@ -30,6 +30,7 @@ router.register(r'users', Users, 'user')
 router.register(r'account', AccountView, 'account')
 router.register(r'order', OrderItems, 'order')
 router.register(r'orderproducts', OrderProducts, 'orderproduct')
+router.register(r'recommendedproducts', RecommendedProductItems, 'recommendedproduct')
 
 
 urlpatterns = [
